@@ -1,6 +1,7 @@
-package com.servlet;
+package com.estore.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.estore.dao.DeleteProductDAO;
+import com.estore.bean.CustomerBean;
+import com.estore.bean.ProductBean;
+import com.estore.dao.ViewCustomerProductDAO;
 
-@WebServlet("/delete")
-public class DeleteProductServlet extends HttpServlet
-{
+@WebServlet("/ViewCustomerProductsServlet")
+public class ViewCustomerProductsServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException
 	{
@@ -21,19 +23,13 @@ public class DeleteProductServlet extends HttpServlet
 		if(session==null)
 		{
 			System.out.println("Session Expired!!");
-			req.getRequestDispatcher("AdminLogin.html").forward(req, res);
+			req.getRequestDispatcher("CustomerLogin.html").forward(req, res);
 		}
 		else
 		{
-			int rowCount=new DeleteProductDAO().deleteProduct(req.getParameter("pcode"));
-			if(rowCount>0)
-			{
-				req.setAttribute("data", "Producted Deleted!!");
-				req.getRequestDispatcher("DeleteProduct.jsp").forward(req, res);
-			}
-			
+			ArrayList<ProductBean> al=new ViewCustomerProductDAO().retrieveData();
+			session.setAttribute("productBean", al);
+			req.getRequestDispatcher("ViewCustomerProduct.jsp").forward(req, res);
 		}
-		
 	}
-
 }

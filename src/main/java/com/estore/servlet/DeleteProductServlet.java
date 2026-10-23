@@ -1,7 +1,6 @@
-package com.servlet;
+package com.estore.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.estore.bean.ProductBean;
-import com.estore.dao.ViewProductDAO;
+import com.estore.dao.DeleteProductDAO;
 
-@WebServlet("/view1")
-public class ViewProductServlet extends HttpServlet
+@WebServlet("/delete")
+public class DeleteProductServlet extends HttpServlet
 {
 	@Override
-	protected void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException, IOException
+	protected void doGet(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException
 	{
 		HttpSession session=req.getSession(false);
 		if(session==null)
@@ -27,10 +25,15 @@ public class ViewProductServlet extends HttpServlet
 		}
 		else
 		{
-			ArrayList<ProductBean> al=new ViewProductDAO().retriveProducts();
-			session.setAttribute("productBean", al);
-			req.getRequestDispatcher("ViewProduct.jsp").forward(req, res);
+			int rowCount=new DeleteProductDAO().deleteProduct(req.getParameter("pcode"));
+			if(rowCount>0)
+			{
+				req.setAttribute("data", "Producted Deleted!!");
+				req.getRequestDispatcher("DeleteProduct.jsp").forward(req, res);
+			}
+			
 		}
 		
 	}
+
 }

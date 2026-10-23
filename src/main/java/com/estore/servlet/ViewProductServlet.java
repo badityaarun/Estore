@@ -1,6 +1,7 @@
-package com.servlet;
+package com.estore.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.estore.bean.ProductBean;
-import com.estore.dao.BuyProductDAO;
+import com.estore.dao.ViewProductDAO;
 
-@WebServlet("/buy")
-public class BuyProductServlet extends HttpServlet
+@WebServlet("/view1")
+public class ViewProductServlet extends HttpServlet
 {
 	@Override
 	protected void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException, IOException
@@ -22,15 +23,14 @@ public class BuyProductServlet extends HttpServlet
 		if(session==null)
 		{
 			System.out.println("Session Expired!!");
-			req.getRequestDispatcher("CustomerLogin.html").forward(req, res);
+			req.getRequestDispatcher("AdminLogin.html").forward(req, res);
 		}
 		else
 		{
-			ProductBean pb=new BuyProductDAO().showProduct(req.getParameter("pcode"));
-			session.setAttribute("data", pb);
-			req.getRequestDispatcher("BuyProduct.jsp").forward(req, res);
+			ArrayList<ProductBean> al=new ViewProductDAO().retriveProducts();
+			session.setAttribute("productBean", al);
+			req.getRequestDispatcher("ViewProduct.jsp").forward(req, res);
 		}
-		
 		
 	}
 }

@@ -1,4 +1,4 @@
-package com.servlet;
+package com.estore.servlet;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;

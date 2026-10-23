@@ -1,4 +1,4 @@
-package com.servlet;
+package com.estore.servlet;
 
 import java.io.IOException;
 
@@ -27,6 +27,7 @@ public class AdminLoginServlet extends HttpServlet
 			HttpSession session=req.getSession();
 			session.setAttribute("adminbean", abean);
 			req.getRequestDispatcher("AdminHome.jsp").forward(req, res);
+			
 			
 		}
 		

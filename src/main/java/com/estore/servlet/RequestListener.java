@@ -1,4 +1,4 @@
-package com.servlet;
+package com.estore.servlet;
 
 import javax.servlet.ServletRequestAttributeEvent;
 import javax.servlet.ServletRequestAttributeListener;

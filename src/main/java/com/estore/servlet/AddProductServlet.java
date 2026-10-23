@@ -1,4 +1,4 @@
-package com.servlet;
+package com.estore.servlet;
 
 import java.io.IOException;
 
