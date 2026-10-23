@@ -1,8 +1,5 @@
 # E-Store: User and Product Management System
 
-**Project Type:** Academic Project\
-**Duration:** December 2024 -- February 2025
-
 ## 1. Project Overview
 
 E-Store is a database-driven Java web application developed to manage
@@ -161,7 +158,3 @@ credentials in a public repository.
 **Baditya Arun**
 
 ------------------------------------------------------------------------
-
-*This project was developed as an academic project to demonstrate
-fundamental Java web application development and database integration
-concepts.*
